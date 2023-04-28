@@ -2,7 +2,7 @@
 
 namespace Functions
 {
-    class MyFunctions
+    static class MyFunctions
     {
         // ЗАДАЧА 2. Функция сравнения двух (целых) чисел:
         static void CompareTwoInt()
@@ -50,10 +50,10 @@ namespace Functions
         }
 
         // ЗАДАЧА 4. Функция определения наибольшего из последовательности целых чисел:
-        static void getMaxInt(int length)
+        static void GetMaxInt(int length)
         {
             var intArray = new int[length];    // Создаем массив для хранения чисел
-            var max = 0;    // Переменная для наибольшего значения
+            int max;    // Переменная для наибольшего значения
             bool isInt;     // Переменная для проверки ввода значений
             
             for(int i = 0; i < length;)
@@ -73,7 +73,8 @@ namespace Functions
                     continue;
                 }  
             }
-
+            
+            max = intArray[0];
             foreach (int value in intArray)
             {
                 if (value > max)
@@ -86,7 +87,7 @@ namespace Functions
         }
 
         // ЗАДАЧА 6. Функция проверки на четность:
-        static void isEven(int number)
+        static void IsEven(int number)
         {               
             if (number % 2 == 0)
             {
@@ -99,7 +100,7 @@ namespace Functions
         }
 
         // ЗАДАЧА 8. Функция, выводящая все четные числа на отрезке:
-        static void getEvens(int N)
+        static void GetEvens(int N)
         {                     
             var intArray = new int[N];  // Создаем массив для хранения чисел 
             intArray[0] = 1;            // Задаем начальное значение отрезка
