@@ -55,11 +55,11 @@ namespace Functions
 
             if (userNumber < 10)
             {
-                WriteLine("Введенное число является палиндромом.");
+                WriteLine("Введенное число является палиндромом.\n");
             }
             else if ((userNumber % 10) == 0)
             {
-                WriteLine("Введенное число не является палиндромом.");
+                WriteLine("Введенное число не является палиндромом.\n");
             }
             else
             {
@@ -90,11 +90,11 @@ namespace Functions
 
                 if (reversedUserNumber == userNumber)
                 {
-                    WriteLine("Введенное число является палиндромом.");
+                    WriteLine("Введенное число является палиндромом.\n");
                 }
                 else
                 {
-                    WriteLine("Введенное число не является палиндромом.");
+                    WriteLine("Введенное число не является палиндромом.\n");
                 }
             }     
         }
