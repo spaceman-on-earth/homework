@@ -5,7 +5,7 @@ namespace Functions
 {
     static class Homework3
     {
-        // 
+        // ЗАДАЧА 19.
         public static int GetUserInput()
         {
             int userNumber;
@@ -47,11 +47,11 @@ namespace Functions
         public static void IsPalindrome()
         {
             int userNumber = GetUserInput();
-            int quotient = userNumber;
-            int bitLength = 0;    // Начальная разрядность числа
-            int remainder = 0;
-            int maxRank = 10;
-            int reversedUserNumber = 0;
+            int quotient = userNumber;      // Переменная для хранения значений частного от деления на основание
+            int bitLength = 0;      // Начальная разрядность числа
+            int remainder = 0;      // Остаток от деления
+            int maxRank = 10;       // Наибольший разряд числа
+            int reversedUserNumber = 0;     // Число в обратном порядке следования цифр
 
             if (userNumber < 10)
             {
@@ -99,9 +99,135 @@ namespace Functions
             }     
         }
 
+        // ЗАДАЧА 21.
+        public static void GetDistanceBetweenPoints()
+        {
+            double x1, x2, y1, y2, z1, z2;
+            bool isDouble;
+            double distance;
+
+            WriteLine("Введите координаты первой точки:");
+            while(true)
+            {
+                Write("\nx1 = ");
+                isDouble = double.TryParse(ReadLine(), out x1);
+                if (isDouble)
+                {
+                    WriteLine("Input OK.");
+                    break;
+                }
+                WriteLine("Введено некорректное значение. Попробуйте снова.");
+            }
+            while(true)
+            {
+                Write("\ny1 = ");
+                isDouble = double.TryParse(ReadLine(), out y1);
+                if (isDouble)
+                {
+                    WriteLine("Input OK.");
+                    break;
+                }
+                WriteLine("Введено некорректное значение. Попробуйте снова.");
+            }
+            while(true)
+            {
+                Write("\nz1 = ");
+                isDouble = double.TryParse(ReadLine(), out z1);
+                if (isDouble)
+                {
+                    WriteLine("Input OK.");
+                    break;
+                }
+                WriteLine("Введено некорректное значение. Попробуйте снова.");
+            }
+
+            WriteLine("\nВведите координаты второй точки:");
+            while(true)
+            {
+                Write("\nx2 = ");
+                isDouble = double.TryParse(ReadLine(), out x2);
+                if (isDouble)
+                {
+                    WriteLine("Input OK.");
+                    break;
+                }
+                WriteLine("Введено некорректное значение. Попробуйте снова.");
+            }
+            while(true)
+            {
+                Write("\ny2 = ");
+                isDouble = double.TryParse(ReadLine(), out y2);
+                if (isDouble)
+                {
+                    WriteLine("Input OK.");
+                    break;
+                }
+                WriteLine("Введено некорректное значение. Попробуйте снова.");
+            }
+            while(true)
+            {
+                Write("\nz2 = ");
+                isDouble = double.TryParse(ReadLine(), out z2);
+                if (isDouble)
+                {
+                    WriteLine("Input OK.");
+                    break;
+                }
+                WriteLine("Введено некорректное значение. Попробуйте снова.");
+            }
+
+            var A = (x1, y1, z1);
+            var B = (x2, y2, z2);
+            WriteLine($"\nт. A: ({A.x1}, {A.y1}, {A.z1})");
+            WriteLine($"т. B: ({B.x2}, {B.y2}, {B.z2})");
+            
+            // Для нахождения расстояния между точками считаем т.B конечной.
+            // Из координат т.B вычитаются координаты т.А.
+            // (в задании на платформе обучения ответы получены вычитанием координат т.В из т.А)
+            double diffX = (x2 - x1)*(x2 - x1);
+            double diffY = (y2 - y1)*(y2 - y1);
+            double diffZ = (z2 - z1)*(x2 - z1);
+            
+            distance = Sqrt(diffX + diffY + diffZ);
+            WriteLine($"Расстояние между точками: {distance:f2}\n");
+        }
+
+        // ЗАДАЧА 23.
+        public static void GetPowerOfNumerics(int N, int degree)
+        {
+            var values = new int[N];    // Инициализация массива для хранения чисел последовательности
+            values[0] = 1;      // Первое число последовательности
+            int v;      // Отдельное число последовательности
+            int exp = degree;       // Желаемая степень, в которую следует возвести числа 
+
+            for (int i = 1; i < N; i++)
+            {
+                values[i] = i + 1;
+            }
+            WriteLine("\nПоследовательность чисел имеет вид: ");
+            foreach (var n in values)
+            {
+                Write($"{n} ");
+            }
+
+            for (int i = 0; i < N; i++)
+            {
+                v = values[i];
+                for (int j = 1; j < exp; j++)
+                {
+                    values[i] *= v;
+                }
+            }
+            WriteLine($"\nПоследовательность чисел, возведенных в степень {exp}: ");
+            foreach (var n in values)
+            {
+                Write($"{n} ");
+            }
+        }
+
         static void Main()
         {
-            IsPalindrome();
+            GetPowerOfNumerics(5, 3);
         }
     }
 }
