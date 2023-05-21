@@ -64,12 +64,16 @@ namespace Functions
                 pow = A;
                 for (int i = 1; i < B; i++)
                 {
-                    pow *= A;
+                    pow = checked(pow * A);
                 }
                 WriteLine($"{A}^{B} = {pow}"); 
             }
                    
         }
+
+        // ЗАДАЧА 27.
+
+        
 
         static void Main()
         {
