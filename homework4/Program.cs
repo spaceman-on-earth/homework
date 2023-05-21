@@ -1,4 +1,5 @@
 ﻿using static System.Console;
+using static System.Math;
 
 namespace Functions
 {
@@ -25,6 +26,12 @@ namespace Functions
                     }
                     break;
                 }
+                catch (OverflowException)
+                {
+                    WriteLine("Your number is out of range.");
+                    WriteLine("It must be in [-2_147_483_648, 2_147_483_647]. Try again.\n");
+                    continue;
+                }
                 catch (FormatException)
                 {
                     WriteLine("'A' must be an integer! Try again.");
@@ -46,6 +53,12 @@ namespace Functions
                         continue;
                     }
                     break;    
+                }
+                catch (OverflowException)
+                {
+                    WriteLine("Your number is out of range.");
+                    WriteLine("It must be in [-2_147_483_648, 2_147_483_647]. Try again.\n");
+                    continue;
                 }
                 catch (FormatException)
                 {
@@ -73,14 +86,63 @@ namespace Functions
 
         // ЗАДАЧА 27.
 
+        public static int GetUserInput()
+        {
+            int userNumber;
+            string? userLine;
+            
+            while(true)
+            {
+                Write("\nType an integer number and press ENTER: ");
+                try
+                {
+                    userLine = ReadLine();
+                    userNumber = userLine == null ? 0 : int.Parse(userLine);
+                    break;
+                }
+                catch (OverflowException)
+                {
+                    WriteLine("Your number is out of range!");
+                    WriteLine("It must be in [-2_147_483_648, 2_147_483_647]. Try again.");
+                    continue;
+                }
+                catch (FormatException)
+                {
+                    WriteLine("Number must be an integer! Try again.");
+                    continue;
+                }
+            }
+            WriteLine("Input OK.\n");
+            return userNumber;
+        }
         
+        public static void GetSumOfDigits()
+        {
+            int userNumber = GetUserInput(), acc = 0, digitsSum = 0;
+
+            if (userNumber < 10 && userNumber > -10)
+            {
+                digitsSum = Math.Abs(userNumber);
+                WriteLine($"Sum of all digits in number: {digitsSum}");
+            }
+            else
+            {
+                while (userNumber / 10 != 0)
+                {
+                    acc += (userNumber % 10);
+                    userNumber /= 10;
+                }
+                digitsSum = checked(acc + userNumber);
+                WriteLine($"Sum of all digits in number: {Math.Abs(digitsSum)}");
+            }
+        }
 
         static void Main()
         {
             // Вызвать желаемую функцию из определенных в классе с указанием вх. параметров 
             // (вводом с клавиатуры или передачей аргументов соответственно):
 
-            GetPowFromUserInput();
+            GetSumOfDigits();
         }
     }
 }
