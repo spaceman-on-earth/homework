@@ -122,7 +122,7 @@ namespace Functions
 
             if (userNumber < 10 && userNumber > -10)
             {
-                digitsSum = Math.Abs(userNumber);
+                digitsSum = Abs(userNumber);
                 WriteLine($"Sum of all digits in number: {digitsSum}");
             }
             else
@@ -133,8 +133,77 @@ namespace Functions
                     userNumber /= 10;
                 }
                 digitsSum = checked(acc + userNumber);
-                WriteLine($"Sum of all digits in number: {Math.Abs(digitsSum)}");
+                WriteLine($"Sum of all digits in number: {Abs(digitsSum)}");
             }
+        }
+
+        // ЗАДАЧА 29.
+
+        public static void GetUserArray()
+        {
+            int len = 0;
+            string? line;
+
+            while (true)
+            {
+                try
+                {
+                    Write("\nType the number of items in array and press ENTER: ");
+                    line = ReadLine();
+                    len = line == null ? 0 : int.Parse(line);
+                    if (len <= 0)
+                    {
+                        WriteLine("The number must be nonzero and nonnegative! Try again.");
+                        continue;
+                    }
+                    break;
+                }
+                catch (OverflowException)
+                {
+                    WriteLine("The number is out of range!");
+                    WriteLine("It must be in [1, 2_147_483_647]. Try again.");
+                    continue;
+                }
+                catch (FormatException)
+                {
+                    WriteLine("Number must be an integer! Try again.");
+                    continue;
+                }
+            }
+
+            var array = new int[len];
+
+            WriteLine("\nEnter array items one by one:\n");
+            for (int i = 0; i < len; i++)
+            {        
+                while (true)    
+                {    
+                    try
+                    {
+                        Write($"array[{i}] = ");
+                        line = ReadLine();
+                        array[i] = line == null ? 0 : int.Parse(line);
+                        break;
+                    }
+                    catch (OverflowException)
+                    {
+                        WriteLine("The number is out of range!");
+                        WriteLine("It must be in [1, 2_147_483_647]. Try again.");
+                        continue;
+                    }
+                    catch (FormatException)
+                    {
+                        WriteLine("Number must be an integer! Try again.");
+                        continue;
+                    }
+                }    
+            }         
+            Write("\nYour array is: [ ");
+            for (int i = 0; i < len; i++)
+            {
+                Write($"{array[i]} ");
+            }
+            Write("]");
         }
 
         static void Main()
@@ -142,7 +211,7 @@ namespace Functions
             // Вызвать желаемую функцию из определенных в классе с указанием вх. параметров 
             // (вводом с клавиатуры или передачей аргументов соответственно):
 
-            GetSumOfDigits();
+            GetUserArray();
         }
     }
 }
