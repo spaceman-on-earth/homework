@@ -16,7 +16,7 @@ namespace Functions
             {
                 try
                 {
-                    Write("\nType the number of items in integers array and press ENTER: ");
+                    Write("\nType number of items in integers array and press ENTER: ");
                     line = ReadLine();
                     len = line == null ? 0 : int.Parse(line);
                     if (len < 1)
@@ -71,7 +71,7 @@ namespace Functions
     
                     if ((rndLimitMax-rndLimitMin)<2)
                     {
-                        Write("Maximum value must be greater than minimum value by 2! Try again.");
+                        Write("\nMaximum value must be greater than minimum value by 2! Try again.");
                         continue;
                     }
                     break;
@@ -139,7 +139,7 @@ namespace Functions
             {
                 try
                 {
-                    Write("\nType the number of items in doubles array and press ENTER: ");
+                    Write("\nType number of items in doubles array and press ENTER: ");
                     line = ReadLine();
                     len = line == null ? 0 : int.Parse(line);
                     if (len < 1)
@@ -214,7 +214,7 @@ namespace Functions
             (int Len, int MinLimit, int Range) properties = (len, shift, range);
 
             WriteLine($"\nLength of array: {properties.Len}");
-            WriteLine($"Limits of doubles in array: [{properties.MinLimit}, {rndLimitMax}]");
+            WriteLine($"Limits of doubles in array: [{properties.MinLimit:N3}, {rndLimitMax:N3}]");
             return properties;
         }
 
@@ -237,10 +237,9 @@ namespace Functions
 
         public static void EvensCount(int[] arr)
         {
-            int len = arr.Length;
             int count = 0;  // Инициализация счетчика четных чисел массива.
 
-            for (int i = 0; i < len; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
                 if (arr[i] % 2 == 0)
                 {
@@ -254,10 +253,9 @@ namespace Functions
 
         public static void GetOddIndexValuesSum(int[] arr)
         {
-            int len = arr.Length;
             int sum = 0;    // Инициализация накопителя суммы.
 
-            for (int i = 0; i < len; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
                 if (i % 2 != 0)
                 {
@@ -269,32 +267,65 @@ namespace Functions
 
         // ЗАДАЧА 38.
 
-        public static void GetSumOfMaxAndMinValues()
+        public static void GetDiffMaxAndMinValuesInDoublesArray(double[] arr)
         {
+            double max = arr[0], min = 0, diff = 0;
+            double maxValue = 0;    // Для хранения наибольшего значения массива.
+            double[] filteredArr;   // Временный массив для сортировки.
+            
+            // Поиск наибольшего значения:
+            for (int i = 0; i < arr.Length; i++)
+            {  
+                if (arr[i] > max)
+                {
+                    max = arr[i];
+                }
+            }
+            maxValue = max;
 
+            // Поиск наименьшего значения (но оптимальней было бы через преобразование в изменяемый список):
+            while (arr.Length > 1)
+            {
+                filteredArr = Array.FindAll(arr, v => v != max);
+                arr = filteredArr;
+                max = arr[0];
+                for (int i = 0; i < arr.Length; i++)
+                {  
+                    if (arr[i] > max)
+                    {
+                        max = arr[i];
+                    }
+                }
+            }
+            min = arr[0];
+
+            diff = maxValue - min;
+            WriteLine($"\nMax value: {maxValue}. Min value: {min}");
+            WriteLine($"\nDifference between max and min values in array: {diff:N3}");
         }
 
         public static void Main()
         {
-            //(int Len, int MinLimit, int MaxLimit) arrayProperties = GetPropertiesOfIntArrayFromUser();
+            (int Len, int MinLimit, int MaxLimit) arrayProperties = GetPropertiesOfIntArrayFromUser();
+            WriteLine("\n----------");
+            (int Len, int MinLimit, int Range) doublesArrayProperties = GetPropertiesOfDoublesArrayFromUser();
 
-            //WriteLine("\n----------");
-            //WriteLine("\nProcessing 'Задача 34':");
-            //int[] array = GetRnd3DigValuesArray(arrayProperties.Len);
-            //EvensCount(array);
+            WriteLine("\n----------");
+            WriteLine("\nProcessing 'Задача 34':");
+            int[] array = GetRnd3DigValuesArray(arrayProperties.Len);
+            EvensCount(array);
             
-            //WriteLine("\n----------");
-            //WriteLine("\nProcessing 'Задача 36':");
-            //int[] array_1 = GetRndIntValuesArray(arrayProperties.Len, arrayProperties.MinLimit,
-                                                 //arrayProperties.MaxLimit);
-            //GetOddIndexValuesSum(array_1);
+            WriteLine("\n----------");
+            WriteLine("\nProcessing 'Задача 36':");
+            int[] array_1 = GetRndIntValuesArray(arrayProperties.Len, arrayProperties.MinLimit,
+                                                 arrayProperties.MaxLimit);
+            GetOddIndexValuesSum(array_1);
 
             WriteLine("\n----------");
             WriteLine("\nProcessing 'Задача 38':");
-            (int Len, int MinLimit, int Range) doublesArrayProperties = GetPropertiesOfDoublesArrayFromUser();
-            GetRndDoublesArray(doublesArrayProperties.Len, doublesArrayProperties.MinLimit,
+            double[] array_2 = GetRndDoublesArray(doublesArrayProperties.Len, doublesArrayProperties.MinLimit,
                                                doublesArrayProperties.Range);
-            
+            GetDiffMaxAndMinValuesInDoublesArray(array_2);    
         }
     }
 }
