@@ -1,4 +1,5 @@
 ﻿using static System.Console;
+using static System.Math;
 
 namespace Functions
 {
@@ -66,14 +67,94 @@ namespace Functions
             WriteLine($"Positive numbers: {count}\n");
         }
 
-        
+        public static (double, double) GetLineEquation()
+        {
+            string? s;  // Ссылка на строку пользовательского ввода.
+            double k;  // Инициализация углового коэффициента прямой.
+            double b;
+
+            WriteLine("\n   (confirm input by pressing ENTER)\n");
+            while (true)
+            {
+                try
+                {
+                    Write("k = ");
+                    s = ReadLine();
+                    k = s == null ? 0 : double.Parse(s);
+                    break;
+                }
+                catch (FormatException)
+                {
+                    WriteLine("Number must be double! Try again.");
+                    continue;
+                }
+            }
+            WriteLine();
+
+            while (true)
+            {    
+                try
+                {
+                    Write("b = ");
+                    s = ReadLine();
+                    b = s == null ? 0 : double.Parse(s);
+                    break;
+                }
+                catch (FormatException)
+                {
+                    WriteLine("Number must be double! Try again.");
+                    continue;
+                }
+            }
+
+            (double K, double B) line = (k, b);
+            return line;
+        }
+
+        public static void GetIntersection(double k1, double k2, double b1, double b2)
+        {
+            double x, y; // Координаты точки пересечения.
+
+            if (k1 == k2)
+            {
+                if (b1 == b2)
+                {
+                    WriteLine("\nLines coincide.\n");
+                }
+                else
+                {
+                    WriteLine("\nLines are parallel.\n");
+                }
+            }
+            else
+            {
+                y = Round((k1*b2 - b1*k2)/(k1 - k2), 3);
+                if (k2 == 0.0)
+                {
+                    x = Round((y - b1)/k1, 3);
+                }
+                else
+                {
+                    x = Round((y - b2)/k2, 3);
+                }
+                WriteLine($"\nPoint of intersection: ({x}; {y})\n");
+            }
+        }
+
         public static void Main()
         {
             WriteLine("----------");
             WriteLine("\nProcessing 'Задача 41':");
             int[] userArray = GetUserArray();
             CountPositiveNumbersInArray(userArray);
-        }
-              
+
+            WriteLine("----------");
+            WriteLine("\nProcessing 'Задача 43':");
+            WriteLine("\n>> Equation for straight line 1");
+            (double K1, double B1) line_1 = GetLineEquation();
+            WriteLine("\n>> Equation for straight line 2");
+            (double K2, double B2) line_2 = GetLineEquation();
+            GetIntersection(line_1.K1, line_2.K2, line_1.B1, line_2.B2);
+        }       
     }
 }
