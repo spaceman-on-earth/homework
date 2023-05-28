@@ -23,11 +23,9 @@ namespace Functions
                 try
                 {   
                     userNumber = s == null ? 0 : int.Parse(s);
+                    Array.Resize(ref userArray, M);
                     userArray[M-1] = userNumber;
                     M += 1;
-                    Array.Resize(ref userArray, M); // Данное расположение выражения в паре с *
-                                                    // учитывает все варианты позиций отбрасываемых
-                                                    // недопустимых значений
                     Write($"\n{M}: ");
                     s = ReadLine(); 
                 }
@@ -35,17 +33,15 @@ namespace Functions
                 {
                     WriteLine("The number is out of range!");
                     WriteLine("It must be in [-2_147_483_648, 2_147_483_647]. Try again.");
-                    continue;
                 }
                 catch (FormatException)
                 {
                     WriteLine("Number must be an integer! Try again.");
                     Write($"\n{M}: ");
                     s = ReadLine();
-                    continue;
+                    Array.Resize(ref userArray, M-1);
                 }      
             }
-            Array.Resize(ref userArray, M-1);   // *
             WriteLine("Input finished.");
 
             printArray = $"[{string.Join(", ", userArray)}]"; 
