@@ -204,7 +204,7 @@ namespace Functions
                 }
                 catch (FormatException)
                 {
-                    WriteLine("Number must be an integer! Try again.");
+                    WriteLine("Shift must be an integer! Try again.");
                     continue;
                 }
             }
