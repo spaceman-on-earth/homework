@@ -7,7 +7,7 @@ namespace Functions
     {
         public static int[] GetUserArray()
         {
-            string? s;      // Строка для хранения пользовательского ввода
+            string? s;      // Строка для хранения пользовательского ввода.
             int userNumber; // Очередное пользовательское число.
             int M = 1;      // Порядковый номер числа = количество чисел, введенных пользователем.
             var userArray = new int[M];   // Инициализация массива для хранения чисел пользователя.
@@ -44,7 +44,7 @@ namespace Functions
             }
             WriteLine("Input finished.");
 
-            printArray = $"[{string.Join(", ", userArray)}]"; 
+            printArray = $"[{String.Join(", ", userArray)}]"; 
             WriteLine($"\nYour array: {printArray}");
             return userArray;
         }
