@@ -157,7 +157,7 @@ namespace TwoDimensionalArrays
                 catch (OverflowException)
                 {
                     WriteLine("Value is out of range!");
-                    WriteLine("It must be in [0, 2_147_483_647]. Try again.");
+                    WriteLine("It must be in [-2_147_483_648, 2_147_483_647]. Try again.");
                     continue;
                 }
                 catch (FormatException)
@@ -184,7 +184,7 @@ namespace TwoDimensionalArrays
                 catch (OverflowException)
                 {
                     WriteLine("Value is out of range!");
-                    WriteLine("It must be in [2, 2_147_483_647]. Try again.");
+                    WriteLine("It must be in [-2_147_483_646, 2_147_483_647]. Try again.");
                     continue;
                 }
                 catch (FormatException)
