@@ -96,7 +96,7 @@ namespace TwoDimensionalArrays
             WriteLine(" ]\n");
         }
 
-        // Для Задачи 48.    
+        // Для Задачи 50.    
 
         public static (int, int) GetPositionInUserArray()
         {
