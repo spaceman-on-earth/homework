@@ -173,11 +173,14 @@ namespace TwoDimensionalArrays
                     Write("\nType maximum value for random integer figures generator and press ENTER: ");
                     s = ReadLine();
                     rndLimitMax = s == null ? 0 : int.Parse(s);
-    
-                    if ((rndLimitMax-rndLimitMin)<2)
+
+                    checked
                     {
-                        Write("Maximum value must be greater than minimum value by 2! Try again.\n");
-                        continue;
+                        if ((rndLimitMax-rndLimitMin)<2)
+                        {
+                            Write("Maximum value must be greater than minimum value by 2! Try again.\n");
+                            continue;
+                        }
                     }
                     break;
                 }
