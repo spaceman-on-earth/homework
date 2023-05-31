@@ -56,7 +56,7 @@ namespace TwoDimensionalArrays
                     continue;
                 }
             }
-            WriteLine($"\nLimits of doubles in array: [{shift:N3}, {(range + shift):N3}]");
+            WriteLine($"\nLimits of doubles in array: [{shift:N3} , {(range + shift):N3}]");
 
             (int MinLimit, int Range) rndLimits = (shift, range);
             return rndLimits;
