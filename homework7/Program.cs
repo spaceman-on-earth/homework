@@ -256,7 +256,7 @@ namespace TwoDimensionalArrays
 
         public static void Main()
         {
-            int m = 3, n = 4;   // Размер массива для задач 47 и 48.
+            int m = 3, n = 4;   // Размер массива для задач.
             
             WriteLine("----------");
             WriteLine("\nProcessing 'Задача 47':");
