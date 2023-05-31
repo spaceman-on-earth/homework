@@ -4,59 +4,11 @@ namespace TwoDimensionalArrays
 {
     static class Homework7
     {
-        public static double[,] Get2DUserDoublesArray(int m, int n)
-        {
-            var userArray = new double[m,n];
-            var row = new double[n];    // Строка пользовательского массива.
-            string? s;              // Символьная строка для хранения пользовательского ввода.
-            string printRow;        // Строка вывода.
-
-            WriteLine("\nCreating 2-dimensional array. Type your number and press ENTER.");
-            for (int i = 0; i < m; i++)
-            {
-                WriteLine($"\n> Row {i}:\n");
-                
-                for (int j = 0; j < n;)
-                {
-                    try
-                    {
-                        Write($">> Item {j}: ");
-                        s = ReadLine();
-                        userArray[i, j] = s == null ? 0 : double.Parse(s);
-                        j += 1;
-                    }
-                    catch (OverflowException)
-                    {
-                        WriteLine("The number is out of range!");
-                        WriteLine("It must be in [-2_147_483_648, 2_147_483_647]. Try again.");
-                    }
-                    catch (FormatException)
-                    {
-                        WriteLine("Number must be of Double type! Try again.");
-                    }
-                }
-            }
-            WriteLine("Input finished.");
-
-            WriteLine("\nYour array:");
-            WriteLine("> [ ");
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    row[j] = Math.Round(userArray[i, j], 3);
-                }
-                printRow = String.Join(", ", row);
-                WriteLine($"    {printRow}");
-            }
-            WriteLine("  ]\n");
-
-            return userArray;
-        }
+        // Для Задачи 47.
 
         public static (int, int) SetRndDoublesLimits()
         {
-            int range, shift;   // Инициализация пределов для генерации вещественных псевдослучайных чисел.
+            int range, shift;   // Пределы для генерации вещественных псевдослучайных чисел.
             string? s;          // Строка для пользовательского ввода.
             
             while (true)
@@ -106,8 +58,8 @@ namespace TwoDimensionalArrays
             }
             WriteLine($"\nLimits of doubles in array: [{shift:N3}, {(range + shift):N3}]");
 
-            (int MinLimit, int Range) properties = (shift, range);
-            return properties;
+            (int MinLimit, int Range) rndLimits = (shift, range);
+            return rndLimits;
         }
             
         public static double[,] Get2DRndDoublesArray(int m, int n, int minLimit, int range)
@@ -125,7 +77,7 @@ namespace TwoDimensionalArrays
             return userArray;
         }
 
-        public static void Print2DArray(int m, int n, double[,] array)
+        public static void Print2DDoublesArray(int m, int n, double[,] array)
         {
             var row = new double[n];    // Строка пользовательского массива.
             string printRow;            // Строка вывода.
@@ -144,12 +96,14 @@ namespace TwoDimensionalArrays
             WriteLine(" ]\n");
         }
 
+        // Для Задачи 48.    
+
         public static (int, int) GetPositionInUserArray()
         {
             string? str_i, str_j;   // Строки для пользовательского ввода.
             int i, j;               // Индекс строки и столбца соответственно.
 
-            WriteLine("\nType row index 'i' and column index 'j' and press ENTER.");
+            WriteLine("\nEnter row index 'i' and column index 'j'.");
             while (true)
             {
                 try
@@ -175,13 +129,129 @@ namespace TwoDimensionalArrays
                 }
                 catch (FormatException)
                 {
-                    WriteLine("Incorrect input! Try again.");
+                    WriteLine("Incorrect value! Try again.");
                     continue;
                 }
             }
 
             (int I, int J) position = (i, j);
             return position;
+        }
+
+        // Для Задачи 52.
+
+        public static (int, int) SetRndIntLimits()
+        {
+            int rndLimitMin, rndLimitMax;   // Пределы для генерации псевдослучайных целых чисел.
+            string? s;                      // Строка для пользовательского ввода.
+
+            while (true)
+            {
+                try
+                {
+                    Write("\nType minimum value for random integers generator and press ENTER: ");
+                    s = ReadLine();
+                    rndLimitMin = s == null ? 0 : int.Parse(s);
+                    break;
+                }
+                catch (OverflowException)
+                {
+                    WriteLine("Value is out of range!");
+                    WriteLine("It must be in [0, 2_147_483_647]. Try again.");
+                    continue;
+                }
+                catch (FormatException)
+                {
+                    WriteLine("Value must be an integer! Try again.");
+                    continue;
+                }
+            }
+            while (true)
+            {
+                try
+                {
+                    Write("\nType maximum value for random integer figures generator and press ENTER: ");
+                    s = ReadLine();
+                    rndLimitMax = s == null ? 0 : int.Parse(s);
+    
+                    if ((rndLimitMax-rndLimitMin)<2)
+                    {
+                        Write("Maximum value must be greater than minimum value by 2! Try again.\n");
+                        continue;
+                    }
+                    break;
+                }
+                catch (OverflowException)
+                {
+                    WriteLine("Value is out of range!");
+                    WriteLine("It must be in [2, 2_147_483_647]. Try again.");
+                    continue;
+                }
+                catch (FormatException)
+                {
+                    WriteLine("Value must be an integer! Try again.");
+                    continue;
+                }
+            }
+            WriteLine($"\nLimits for integer values in array: [{rndLimitMin} , {(rndLimitMax - 1)}]");
+
+            (int MinLimit, int MaxLimit) rndLimits = (rndLimitMin, rndLimitMax);
+            return rndLimits;
+        }
+
+        public static int[,] Get2DRndIntArray(int m, int n, int minLimit, int maxLimit)
+        {
+            var userArray = new int[m,n];
+            var rnd = new Random();     // Новый объект генератора псевдослучайных чисел.
+
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    userArray[i, j] = rnd.Next(minLimit, maxLimit);    
+                }
+            }
+            return userArray;
+        }
+
+        public static void Print2DIntArray(int m, int n, int[,] array)
+        {
+            var row = new int[n];    // Строка пользовательского массива.
+            string printRow;         // Строка вывода.
+            
+            WriteLine("\nYour array:");
+            WriteLine(" [ ");
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    row[j] = array[i, j];
+                }
+                printRow = String.Join(", ", row);
+                WriteLine($"   {printRow}");
+            }
+            WriteLine(" ]");
+        }
+
+        public static void GetAverageInColumns(int m, int n, int[,] array)
+        {
+            int acc;        // Накопитель суммы элементов в столбце.
+            double sum;     // Сумма в вещественном представлении.
+            double average; // Среднее арифметическое значений в столбце.
+            var averageValues = new double[n];  // Массив для хранения средних арифметических значений.
+            
+            for (int j = 0; j < n; j++)
+            {
+                acc = 0;
+                for (int i = 0; i < m; i++)
+                {
+                    acc += array[i, j];
+                }
+                sum = acc;
+                average = Math.Round((sum / m), 3);
+                averageValues[j] = average;
+            }
+            WriteLine($"\nAverage values in columns: [{String.Join(", ", averageValues)}]\n");
         }
 
         public static void Main()
@@ -191,9 +261,8 @@ namespace TwoDimensionalArrays
             WriteLine("----------");
             WriteLine("\nProcessing 'Задача 47':");
             (int MinLimit, int Range) rndDoublesLimits = SetRndDoublesLimits();
-            var array = Get2DRndDoublesArray(m, n, rndDoublesLimits.MinLimit, rndDoublesLimits.Range);
-            Print2DArray(m, n, array);
-
+            var doublesArray = Get2DRndDoublesArray(m, n, rndDoublesLimits.MinLimit, rndDoublesLimits.Range);
+            Print2DDoublesArray(m, n, doublesArray);
 
             WriteLine("----------");
             WriteLine("\nProcessing 'Задача 48':");
@@ -204,9 +273,15 @@ namespace TwoDimensionalArrays
             }
             else
             {
-                WriteLine($"\nValue in position: {array[position.I, position.J]}\n");
+                WriteLine($"\nValue in position: {doublesArray[position.I, position.J]}\n");
             }
 
+            WriteLine("----------");
+            WriteLine("\nProcessing 'Задача 52':");
+            (int MinLimit, int MaxLimit) rndIntLimits = SetRndIntLimits();
+            var intArray = Get2DRndIntArray(m, n, rndIntLimits.MinLimit, rndIntLimits.MaxLimit);
+            Print2DIntArray(m, n, intArray);
+            GetAverageInColumns(m, n, intArray);
         }
     }
 }
