@@ -114,7 +114,7 @@ namespace TwoDimensionalArrays
                     Write("j : ");
                     str_j = ReadLine();
                     j = str_j == null ? 0 : int.Parse(str_j);
-                    if (i < 0 || j < 0)
+                    if (i < 0 || j < 0 || j > 2_147_483_646)
                     {
                         WriteLine("Incorrect index! Try again.");
                         continue;
@@ -124,7 +124,7 @@ namespace TwoDimensionalArrays
                 catch (OverflowException)
                 {
                     WriteLine("Index is out of range!");
-                    WriteLine("It must be in [0, 2_147_483_647]. Try again.");
+                    WriteLine("It must be in [0, 2_147_483_646]. Try again.");
                     continue;
                 }
                 catch (FormatException)
@@ -157,7 +157,7 @@ namespace TwoDimensionalArrays
                 catch (OverflowException)
                 {
                     WriteLine("Value is out of range!");
-                    WriteLine("It must be in [-2_147_483_648, 2_147_483_647]. Try again.");
+                    WriteLine("It must be in [-2_147_483_648, 2_147_483_645]. Try again.");
                     continue;
                 }
                 catch (FormatException)
@@ -170,7 +170,7 @@ namespace TwoDimensionalArrays
             {
                 try
                 {
-                    Write("\nType maximum value for random integer figures generator and press ENTER: ");
+                    Write("\nType maximum value for random integers generator and press ENTER: ");
                     s = ReadLine();
                     rndLimitMax = s == null ? 0 : int.Parse(s);
 
