@@ -101,20 +101,132 @@ namespace Recursion
                 printRow = String.Join(", ", row);
                 WriteLine($"   {printRow}");
             }
-            WriteLine(" ]");
-            WriteLine();
+            WriteLine(" ]\n");
         }
 
         // Для задачи 54.
-
         
+        public static void SortValuesInRowDesc(int[] array, int left, int right)
+        {   
+            int leftSave = left, rightSave = right;
+            int pivot = array[left];
+
+            while (left < right)
+            {
+                while ((array[right] <= pivot) && (left < right))
+                {   
+                    right -= 1; 
+                }
+                if (left != right)
+                {
+                    array[left] = array[right];
+                    left += 1;
+                }
+                
+                while ((array[left] >= pivot) && (left < right))
+                {   
+                    left += 1;  
+                }
+                if (left != right)
+                {
+                    array[right] = array[left];
+                    right -= 1;
+                }
+            }
+
+            array[right] = pivot;
+            pivot = left;
+            left = leftSave;
+            right = rightSave;
+
+            if (left < pivot)
+            {
+                SortValuesInRowDesc(array, left, pivot - 1);
+            }
+            if (right > pivot)
+            {
+                SortValuesInRowDesc(array, pivot + 1, right);
+            }
+        }    
+            
+            //public static void SortValuesInRowsDesc(int m, int n, int[,] array);
+            //int temp;   // Переменная для временного хранения значений.
+            
+            //if (m > 0)
+            //{
+                //if (n > 1)
+                //{
+                    //if (array[(m-1), (n-2)] > array[(m-1), (n-1)])
+                    //{
+                        //SortValuesInRowsDesc(m, (n - 1), array);
+                    //}
+                    //else
+                    //{
+                        //temp = array[(m-1), (n-2)];
+                        //array[(m-1), (n-2)] = array[(m-1), (n-1)];
+                        //array[(m-1), (n-1)] = temp;
+                        //SortValuesInRowsDesc(m, (n - 1), array);
+                    //}
+                    
+                //}
+                //SortValuesInRowsDesc((m - 1), n, array);
+            //}
+
+        public static int[] GetRow(int[,] array, int i)
+        {
+            var row = new int[array.GetLength(1)];
+
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                row[j] = array[i, j];
+            }
+            return row;
+        }
+
+        public static int[,] SortValuesInRowsDesc(int[,] array)
+        {
+            int[] row = new int[array.GetLength(1)];
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                row = GetRow(array, i);
+                SortValuesInRowDesc(row, 0, array.GetLength(1) - 1);
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    array[i, j] = row[j];
+                }
+            }
+            return array;
+        }
+
+        public static int GetSumOfValuesInRow(int[] array, int start, int end)
+        {
+            if (start > end) 
+            {
+                return 0;
+            }
+            else
+            {
+                return array[start] + GetSumOfValuesInRow(array, start + 1, end);
+            }
+        }  
 
         public static void Main()
         {
             int m = 4, n = 4;   // Размер массива для задач 54 и 56.
             
             (int MinLimit, int MaxLimit) = SetRndIntLimits();
-            Print2DIntArray("Initial array", Get2DRndIntArray(m, n, MinLimit, MaxLimit));
+            var userArray = Get2DRndIntArray(m, n, MinLimit, MaxLimit);
+            Print2DIntArray("Initial array", userArray);
+
+            WriteLine("----------");
+            WriteLine("\nProcessing 'Задача 54':");
+            //SortValuesInRowsDesc(m, n, userArray);
+            SortValuesInRowsDesc(userArray);
+            Print2DIntArray("Array with sorted rows", userArray);
+
+            WriteLine("----------");
+            WriteLine("\nProcessing 'Задача 56':");
 
             
             
