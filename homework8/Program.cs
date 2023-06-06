@@ -106,7 +106,7 @@ namespace Recursion
 
         // Для задачи 54.
         
-        public static void SortValuesInRowDesc(int[] array, int left, int right)
+        public static void SortValuesDesc(int[] array, int left, int right)
         {   
             int leftSave = left, rightSave = right;
             int pivot = array[left];
@@ -141,11 +141,11 @@ namespace Recursion
 
             if (left < pivot)
             {
-                SortValuesInRowDesc(array, left, pivot - 1);
+                SortValuesDesc(array, left, pivot - 1);
             }
             if (right > pivot)
             {
-                SortValuesInRowDesc(array, pivot + 1, right);
+                SortValuesDesc(array, pivot + 1, right);
             }
         }    
             
@@ -190,7 +190,7 @@ namespace Recursion
             for (int i = 0; i < array.GetLength(0); i++)
             {
                 row = GetRow(array, i);
-                SortValuesInRowDesc(row, 0, array.GetLength(1) - 1);
+                SortValuesDesc(row, 0, array.GetLength(1) - 1);
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
                     array[i, j] = row[j];
@@ -199,22 +199,35 @@ namespace Recursion
             return array;
         }
 
-        public static int GetSumOfValuesInRow(int[] array, int start, int end)
+        public static int SumValuesInRow(int[] array, int start, int end)
         {
-            if (start > end) 
+            if (start > end || end > (array.Length - 1)) 
             {
                 return 0;
             }
             else
             {
-                return array[start] + GetSumOfValuesInRow(array, start + 1, end);
+                return array[start] + SumValuesInRow(array, start + 1, end);
             }
-        }  
+        }
+
+        public static int[] GetSumsInRows(int[,] array, int start, int end)
+        {
+            var sums = new int[array.GetLength(0)];
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                sums[i] = SumValuesInRow(GetRow(array, i), start, end);
+            }
+            return sums;
+        }
 
         public static void Main()
         {
             int m = 4, n = 4;   // Размер массива для задач 54 и 56.
             
+            WriteLine("----------");
+            WriteLine("\nCreating 2-dimensional array:");
             (int MinLimit, int MaxLimit) = SetRndIntLimits();
             var userArray = Get2DRndIntArray(m, n, MinLimit, MaxLimit);
             Print2DIntArray("Initial array", userArray);
@@ -227,8 +240,14 @@ namespace Recursion
 
             WriteLine("----------");
             WriteLine("\nProcessing 'Задача 56':");
-
-            
+            var sums = GetSumsInRows(userArray, 0, n - 1);
+            var printSums = $"[{String.Join(", ", sums)}]";
+            WriteLine($"\nSum of values in each row: {printSums}");
+            var sortedSums = new int[sums.Length];
+            Copy(sums, sortedSums, sums.Length);
+            SortValuesDesc(sortedSums, 0, n - 1);
+            var indexOfMinSum = IndexOf(sums, sortedSums[n-1]); 
+            WriteLine($"\nIndex of row with the least sum: {indexOfMinSum}\n");
             
         }
     }
