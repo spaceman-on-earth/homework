@@ -249,17 +249,90 @@ namespace Recursion
 
         // Для задачи 60.
 
-        public static void Main()
+        public static int[] Get2DigitNumbersArray()
         {
+            var array = new int[100];
+            var rnd = new Random();
+            
+            array[0] = 10;
+            for (int j = 1; j < array.Length; j++)
+            {
+                array[j] = rnd.Next(10, 100);
+            }
+            return array;
+        }
+        
+        public static int[] GetUniqueNumbersArray(int[] array)
+        {
+            int[] uniqueItems;
+            var sortedArray = new int[array.Length];
+            
+            Copy(array, sortedArray, array.Length);
+            SortValuesDesc(sortedArray, 0, array.Length - 1);
+            for (int j = (sortedArray.Length - 1); j > 0; j--)
+            {
+                if (sortedArray[j] == sortedArray[j-1])
+                    {
+                        Fill(sortedArray, 0, j, 1);
+                    }
+            }
+            uniqueItems = FindAll(sortedArray, v => v != 0);
+            return uniqueItems;
+        }
+
+        public static int[ , , ] Get3DIntArray(int l, int m, int n, int[] array)
+        {
+            var userArray = new int[l,m,n];
+            int step = 0;
+            
+            for (int k = 0; k < l; k++)
+            {
+                for (int i = 0; i < m; i++)
+                {
+                    for (int j = 0; j < n; j++)
+                    {
+                        userArray[k,i,j] = array[j + step];
+                    }
+                    step += n;
+                }
+            }
+            return userArray;
+        }
+        
+        public static void Print3DArrayWithIndexes(string definition, int[ , , ] array)
+        {
+            var row = new int[array.GetLength(2)];
+            string printRow;
+
+            WriteLine($"\n{definition}:");
+            WriteLine("");
+            for (int k = 0; k < array.GetLength(0); k++)
+            {
+                for (int i = 0; i < array.GetLength(1); i++)
+                {
+                    for (int j = 0; j < array.GetLength(2); j++)
+                    {
+                        row[j] = array[k,i,j];
+                        printRow = $"{row[j]}-({k},{i},{j})";
+                        Write($"  {printRow}");
+                    }
+                    WriteLine("");
+                }
+                WriteLine("");    
+            }    
+        }
+
+        public static void Main()
+        {   
             int m = 4, n = 4;   // Размер массива для задач 54 и 56.
             WriteLine("----------");
             WriteLine("\nCreating 2-dimensional array:");
             (int MinLimit, int MaxLimit) = SetRndIntLimits();
             var userArray = Get2DRndIntArray(m, n, MinLimit, MaxLimit);
-            Print2DIntArray("Initial array", userArray);
 
             WriteLine("\n----------");
             WriteLine("\nProcessing 'Задача 54':");
+            Print2DIntArray("Initial array", userArray);
             SortValuesInRowsDesc(userArray);
             Print2DIntArray("Array with sorted rows", userArray);
 
@@ -292,6 +365,16 @@ namespace Recursion
             var productMatrix = MultiplyInt2DArrays(matrix1, matrix2);
             Print2DIntArray("Product matrix", productMatrix);
             WriteLine("");
+
+            int l = 2;      // Размер массива для задач 60.
+            m = 3; n = 3;
+            WriteLine("----------");
+            WriteLine("\nProcessing 'Задача 60':");
+            var array = Get2DigitNumbersArray();
+            var uniquesArray = GetUniqueNumbersArray(array);
+            var array3D = new int[l, m, n];
+            array3D = Get3DIntArray(l, m, n, uniquesArray);
+            Print3DArrayWithIndexes("Your 3-dimensional array with indexes", array3D);
         }
     }
 }
