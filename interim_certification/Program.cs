@@ -141,29 +141,54 @@ namespace Recursion
 
             if (M < N)
             {
-                sum = GetSumOfAscNatNumbers(M, N);
-                return sum;
+                return sum = GetSumOfAscNatNumbers(M, N);
             }
             else if (M > N)
             {
-                sum = GetSumOfDescNatNumbers(M, N);
-                return sum;
+                return sum = GetSumOfDescNatNumbers(M, N);
             }
             else return M;
         }
 
+        // Для задачи 68.
+
+        public static int GetAckermanFunc(int m, int n)
+        {
+            int result; 
+
+            if (n > 0 && m == 0)
+            {
+                return result = n + 1;
+            }
+            else if (m > 0 && n == 0)
+            {
+                return result = GetAckermanFunc(m - 1, 1);
+            }
+            else if (m > 0 && n > 0)
+            {
+                return result = GetAckermanFunc(m - 1, GetAckermanFunc(m, n - 1));
+            }
+            else return 0;
+        }
+
         public static void Main()
         {
-            //WriteLine("----------");
-            //WriteLine("\nProcessing 'Задача 64':");
-            //var naturalNumbers = GetAllNatNumbersDesc();
-            //var print = String.Join(", ", naturalNumbers);
-            //WriteLine($"\nNatural numbers: {print}\n");
+            WriteLine("----------");
+            WriteLine("\nProcessing 'Задача 64':");
+            var naturalNumbers = GetAllNatNumbersDesc();
+            var print = String.Join(", ", naturalNumbers);
+            WriteLine($"\nNatural numbers: {print}\n");
 
             WriteLine("----------");
             WriteLine("\nProcessing 'Задача 64':");
             int sum = GetSumOfNatNumbersInRange();
             WriteLine($"\nSum of natural numbers on the interval: {sum}\n");
+
+            WriteLine("----------");
+            WriteLine("\nProcessing 'Задача 68':");
+            int m = 3, n = 2;
+            int ackerman = GetAckermanFunc(m, n);
+            WriteLine($"\nResult of Ackerman's function A({m}, {n}): {ackerman}\n");
         }
     }
 }
