@@ -1,0 +1,15 @@
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\obj\Debug\net6.0\interim_certification.csproj.AssemblyReference.cache
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\obj\Debug\net6.0\interim_certification.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\obj\Debug\net6.0\interim_certification.AssemblyInfoInputs.cache
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\obj\Debug\net6.0\interim_certification.AssemblyInfo.cs
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\obj\Debug\net6.0\interim_certification.csproj.CoreCompileInputs.cache
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\bin\Debug\net6.0\interim_certification.exe
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\bin\Debug\net6.0\interim_certification.deps.json
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\bin\Debug\net6.0\interim_certification.runtimeconfig.json
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\bin\Debug\net6.0\interim_certification.dll
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\bin\Debug\net6.0\interim_certification.pdb
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\obj\Debug\net6.0\interim_certification.dll
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\obj\Debug\net6.0\refint\interim_certification.dll
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\obj\Debug\net6.0\interim_certification.pdb
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\obj\Debug\net6.0\interim_certification.genruntimeconfig.cache
+C:\Users\ai82\Desktop\CS_homework + Git\interim_certification\obj\Debug\net6.0\ref\interim_certification.dll
