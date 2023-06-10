@@ -153,20 +153,19 @@ namespace Recursion
         // Для задачи 68.
 
         public static int GetAckermanFunc(int m, int n)
-        {
-            int result; 
+        { 
 
             if (n > 0 && m == 0)
             {
-                return result = n + 1;
+                return n + 1;
             }
             else if (m > 0 && n == 0)
             {
-                return result = GetAckermanFunc(m - 1, 1);
+                return GetAckermanFunc(m - 1, 1);
             }
             else if (m > 0 && n > 0)
             {
-                return result = GetAckermanFunc(m - 1, GetAckermanFunc(m, n - 1));
+                return GetAckermanFunc(m - 1, GetAckermanFunc(m, n - 1));
             }
             else return 0;
         }
