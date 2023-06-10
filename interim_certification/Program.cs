@@ -152,7 +152,7 @@ namespace Recursion
 
         // Для задачи 68.
 
-        public static int GetAckermanFunc(int m, int n)
+        public static int GetAckermannFunc(int m, int n)
         { 
 
             if (n > 0 && m == 0)
@@ -161,11 +161,11 @@ namespace Recursion
             }
             else if (m > 0 && n == 0)
             {
-                return GetAckermanFunc(m - 1, 1);
+                return GetAckermannFunc(m - 1, 1);
             }
             else if (m > 0 && n > 0)
             {
-                return GetAckermanFunc(m - 1, GetAckermanFunc(m, n - 1));
+                return GetAckermannFunc(m - 1, GetAckermannFunc(m, n - 1));
             }
             else return 0;
         }
@@ -186,8 +186,8 @@ namespace Recursion
             WriteLine("----------");
             WriteLine("\nProcessing 'Задача 68':");
             int m = 3, n = 2;
-            int ackerman = GetAckermanFunc(m, n);
-            WriteLine($"\nResult of Ackerman's function A({m}, {n}): {ackerman}\n");
+            int ackermann = GetAckermannFunc(m, n);
+            WriteLine($"\nResult of the Ackermann function A({m}, {n}): {ackermann}\n");
         }
     }
 }
